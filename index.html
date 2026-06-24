@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cash-Flow — Salary & Expense Tracker</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+  <script defer src="script.js"></script>
+  <script defer src="style.css"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo-mark">₹</div>
+  <div>
+    <h1>Cash-Flow</h1>
+    <span>Salary & Expense Tracker</span>
+  </div>
+</header>
+
+<div id="alert-banner">
+  <span class="icon">🚨</span>
+  <p>Warning: Remaining balance has dropped below 10% of your salary. Review your expenses!</p>
+</div>
+
+<div class="currency-bar">
+  <span>Currency:</span>
+  <select id="currency-select" onchange="changeCurrency()">
+    <option value="INR">🇮🇳 INR</option>
+    <option value="USD">🇺🇸 USD</option>
+    <option value="EUR">🇪🇺 EUR</option>
+    <option value="GBP">🇬🇧 GBP</option>
+    <option value="AED">🇦🇪 AED</option>
+  </select>
+  <span id="currency-rate"></span>
+</div>
+
+<div class="main">
+
+  <div class="card span2">
+    <div class="card-title">Overview</div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Total Salary</div>
+        <div class="stat-value" id="stat-salary">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Total Expenses</div>
+        <div class="stat-value" id="stat-expense">—</div>
+      </div>
+
+      <div class="stat">
+        <div class="stat-label">Remaining Balance</div>
+        <div class="stat-value" id="stat-balance">—</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Set Salary</div>
+
+    <label for="salary-input">Monthly Salary</label>
+    <input type="number" id="salary-input" placeholder="e.g. 50000">
+
+    <div class="error-msg" id="err-salary">
+      Please enter a valid positive salary.
+    </div>
+
+    <button class="btn btn-primary" onclick="setSalary()">
+      💼 Set Salary
+    </button>
+
+    <div class="divider"></div>
+
+    <div class="card-title">Add Expense</div>
+
+    <label for="exp-name">Expense Name</label>
+    <input type="text" id="exp-name" placeholder="e.g. Rent, Food">
+
+    <div class="error-msg" id="err-name">
+      Expense name cannot be empty.
+    </div>
+
+    <label for="exp-amount">Amount</label>
+    <input type="number" id="exp-amount" placeholder="e.g. 5000">
+
+    <div class="error-msg" id="err-amount">
+      Enter a valid positive amount.
+    </div>
+
+    <button class="btn btn-primary" onclick="addExpense()">
+      ➕ Add Expense
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Expense Log</div>
+
+    <ul id="expense-list">
+      <li class="empty-state">
+        No expenses yet. Add one →
+      </li>
+    </ul>
+
+    <div class="divider"></div>
+
+    <div class="actions">
+      <button class="btn btn-ghost" onclick="clearAll()">
+        🗑 Clear All
+      </button>
+
+      <button class="btn btn-ghost" onclick="downloadPDF()">
+        📄 Download PDF
+      </button>
+    </div>
+  </div>
+
+  <div class="card span2">
+    <div class="card-title">Breakdown</div>
+
+    <div class="chart-wrap">
+      <canvas id="pie-chart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
