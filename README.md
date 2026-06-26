@@ -1,6 +1,7 @@
 # cash-flow-expense-tracker
 
-![Cash-Flow Screenshot](assets/screenshot.png)
+![Cash-Flow Screenshot](assets/Screenshot.png)
+
 A modern Salary & Expense Tracker built using HTML, CSS, and Vanilla JavaScript.
 
 ## Overview
